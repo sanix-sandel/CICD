@@ -1,49 +1,44 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.newInventory.name }}
+  name: {{ .Values.newinventory.name }}
 spec:
+  replicas: {{ .Values.newinventory.replicaCount | default 1 }}
   selector:
     matchLabels:
-      app: {{ .Values.newInventory.name }}
+      app: {{ .Values.newinventory.name }}
   template:
     metadata:
       labels:
-        app: {{ .Values.newInventory.name }}
+        app: {{ .Values.newinventory.name }}
     spec:
       containers:
-      - name: newInventory
-        image: {{ .Values.newInventory.image }}
+      - name: newinventory
+        image: "{{ .Values.newinventory.image }}"
         resources:
           limits:
             memory: "{{ .Values.resources.memory }}"
             cpu: "{{ .Values.resources.cpu }}"
         ports:
-        - containerPort: {{ .Values.newInventory.containerPort }}
+        - containerPort: {{ .Values.newinventory.containerPort }}
         readinessProbe:
           initialDelaySeconds: {{ .Values.healthCheck.initialDelaySeconds }}
           periodSeconds: {{ .Values.healthCheck.periodSeconds }}
           httpGet:
             path: {{ .Values.healthCheck.path }}
-            port: {{ .Values.newInventory.containerPort }}
-        env:
-        - name: newInventory_URL
-          valueFrom:
-            configMapKeyRef:
-              name: {{ .values.config.name }}
-              key: {{ .Values.config.newInventory }}
+            port: {{ .Values.newinventory.containerPort }}
 
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
- name: {{ .Values.newInventory.serviceName }}
+ name: {{ .Values.newinventory.serviceName }}
 spec:
   selector:
-    app: {{ .Values.newInventory.name }}
+    app: {{ .Values.newinventory.name }}
   type: NodePort
   ports:
-  - port: {{ .Values.newInventory.servicePort }}
-    targetPort: {{ .Values.newInventory.containerPort }}
-    nodePort: {{ .Values.newInventory.nodePort }}
+  - port: {{ .Values.newinventory.servicePort }}
+    targetPort: {{ .Values.newinventory.containerPort }}
+    nodePort: {{ .Values.newinventory.nodePort }}

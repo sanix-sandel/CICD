@@ -40,15 +40,18 @@ inventory:
   serviceName: inventory-service
   servicePort: 9002
   nodePort: 30003
+  replicaCount: 3
 
-newInventory:
+
+newinventory:
   image: sanixsandel/new_inventory:1.0.0
   name: new-inventory
   containerPort: 5002
   serviceName: new-inventory-service
   servicePort: 9003
   nodePort: 30004
+  replicaCount: 3
 
-replicaCount: 3
+defaultReplicaCount: 1
 
 

@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Values.inventory.name }}
 spec:
+  replicas: {{ .Values.inventory.replicaCount | default 1 }}
   selector:
     matchLabels:
       app: {{ .Values.inventory.name }}
@@ -13,7 +14,7 @@ spec:
     spec:
       containers:
       - name: inventory
-        image: {{ .Values.inventory.image }}
+        image: "{{ .Values.inventory.image }}"
         resources:
           limits:
             memory: "{{ .Values.resources.memory }}"
@@ -26,12 +27,6 @@ spec:
           httpGet:
             path: {{ .Values.healthCheck.path }}
             port: {{ .Values.inventory.containerPort }}
-        env:
-        - name: inventory_URL
-          valueFrom:
-            configMapKeyRef:
-              name: {{ .values.config.name }}
-              key: {{ .Values.config.inventory }}
 
 
 ---

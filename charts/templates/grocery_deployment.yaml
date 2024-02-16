@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Values.grocery.name }}
 spec:
+  replicas: {{ .Values.grocery.replicaCount | default 1 }}
   selector:
     matchLabels:
       app: {{ .Values.grocery.name }}
@@ -13,7 +14,7 @@ spec:
     spec:
       containers:
       - name: grocery
-        image: {{ .Values.grocery.image }}
+        image: "{{ .Values.grocery.image }}"
         resources:
           limits:
             memory: "{{ .Values.resources.memory }}"
@@ -30,7 +31,7 @@ spec:
         - name: GROCERY_URL
           valueFrom:
             configMapKeyRef:
-              name: {{ .values.config.name }}
+              name: {{ .Values.config.name }}
               key: {{ .Values.config.grocery }}
 
 
