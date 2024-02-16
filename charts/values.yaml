@@ -2,6 +2,7 @@ config:
   name: configmap
   inventory: inventory_url
   grocery: grocery_url
+  newInventory: new_inventory_url
 
 
 resources:
@@ -19,6 +20,7 @@ shopper:
   image: sanixsandel/shopper:1.0.3
   name: shopper
   containerPort: 5555
+  serviceName: shopper-service
   servicePort: 9000
   nodePort: 30001
 
@@ -27,6 +29,7 @@ grocery:
   image: sanixsandel/grocery:2.0.1
   name: grocery
   containerPort: 5000
+  serviceName: grocery-service
   servicePort: 9001
   nodePort: 30002
 
@@ -34,6 +37,7 @@ inventory:
   image: sanixsandel/inventory:2.0.1
   name: inventory
   containerPort: 5001
+  serviceName: inventory-service
   servicePort: 9002
   nodePort: 30003
 
@@ -41,6 +45,7 @@ newInventory:
   image: sanixsandel/new_inventory:1.0.0
   name: new-inventory
   containerPort: 5002
+  serviceName: new-inventory-service
   servicePort: 9003
   nodePort: 30004
 

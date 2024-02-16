@@ -3,47 +3,48 @@ kind: Deployment
 metadata:
   name: {{ .Values.shopper.name }}
 spec:
+  replicas:
   selector:
     matchLabels:
-      app: myapp
+      app: {{ .Values.shopper.name }}
   template:
     metadata:
       labels:
-        app: myapp
+        app: {{ .Values.shopper.name }}
     spec:
       containers:
       - name: shopper
-        image: sanixsandel/shopper:1.0.3
+        image: {{ .Values.shopper.image }}
         resources:
           limits:
-            memory: "128Mi"
-            cpu: "500m"
+            memory: "{{ .Values.resources.memory }}"
+            cpu: "{{ .Values.resources.cpu }}"
         ports:
-        - containerPort: 5555
+        - containerPort: {{ .Values.shopper.containerPort }}
         readinessProbe:
-          initialDelaySeconds: 5
-          periodSeconds: 5
+          initialDelaySeconds: {{ .Values.healthCheck.initialDelaySeconds }}
+          periodSeconds: {{ .Values.healthCheck.periodSeconds }}
           httpGet:
-            path: /health
-            port: 5555
+            path: {{ .Values.healthCheck.path }}
+            port: {{ .Values.shopper.containerPort }}
         env:
         - name: GROCERY_URL
           valueFrom:
             configMapKeyRef:
-              name: configmap
-              key: grocery_url
+              name: {{ .values.config.name }}
+              key: {{ .Values.config.grocery }}
 
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
- name: shopper-service
+ name: {{ .Values.shopper.serviceName }}
 spec:
   selector:
-    app: myapp
+    app: {{ .Values.shopper.name }}
   type: LoadBalancer
   ports:
-  - port: 9000
-    targetPort: 5555
-    nodePort: 30001
+  - port: {{ .Values.shopper.servicePort }}
+    targetPort: {{ .Values.shopper.containerPort }}
+    nodePort: {{ .Values.shopper.nodePort }}
