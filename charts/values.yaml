@@ -22,7 +22,7 @@ shopper:
   containerPort: 5555
   serviceName: shopper-service
   servicePort: 9000
-  nodePort: 30001
+  nodePort: 30010
 
 
 grocery:
