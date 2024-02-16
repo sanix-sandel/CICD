@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap
+data:
+  grocery_url: http://grocery-service:9001 #http://192.168.49.2:30002
+  inventory_url: http://inventory-service:9002 #http://192.168.49.2:30003
