@@ -1,31 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: shopper-deployment
+  name: {{ .Chart.Name}}
 spec:
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: myapp
+      {{- include "selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: myapp
+        {{- include "selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - name: shopper
-        image: sanixsandel/shopper:1.0.3
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
         ports:
-        - containerPort: 5555
-        readinessProbe:
-          initialDelaySeconds: 5
-          periodSeconds: 5
-          httpGet:
-            path: /health
-            port: 5555
+        - containerPort: {{ .Values.image.containerPort }}
         env:
         - name: GROCERY_URL
           valueFrom:

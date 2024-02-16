@@ -1,0 +1,49 @@
+config:
+  name: configmap
+  inventory: inventory_url
+  grocery: grocery_url
+
+
+resources:
+  memory: 128Mi
+  cpu: 500m
+
+
+healthCheck:
+  path: /health
+  initialDelaySeconds: 5
+  periodSeconds: 5
+
+
+shopper:
+  image: sanixsandel/shopper:1.0.3
+  name: shopper
+  containerPort: 5555
+  servicePort: 9000
+  nodePort: 30001
+
+
+grocery:
+  image: sanixsandel/grocery:2.0.1
+  name: grocery
+  containerPort: 5000
+  servicePort: 9001
+  nodePort: 30002
+
+inventory:
+  image: sanixsandel/inventory:2.0.1
+  name: inventory
+  containerPort: 5001
+  servicePort: 9002
+  nodePort: 30003
+
+newInventory:
+  image: sanixsandel/new_inventory:1.0.0
+  name: new-inventory
+  containerPort: 5002
+  servicePort: 9003
+  nodePort: 30004
+
+replicaCount: 3
+
+
