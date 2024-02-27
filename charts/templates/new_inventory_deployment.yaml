@@ -27,7 +27,8 @@ spec:
           httpGet:
             path: {{ .Values.healthCheck.path }}
             port: {{ .Values.newinventory.containerPort }}
-      nodeName: kind-worker3 #all new inventory pod will be scheduled on this node
+      nodeSelector: #we label the node, and use that label
+        node-type: nodethree
 
 
 ---
