@@ -29,14 +29,14 @@ spec:
             port: {{ .Values.newinventory.containerPort }}
       affinity:
         nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
+          requiredDuringSchedulingIgnoredDuringExecution: #Hard Node Affinity, except on node extremelyslow
             nodeSelectorTerms:
             - matchExpressions:
                 - key: node-type
                   operator: NotIn
                   values:
                     - extremelyslow
-          preferredDuringSchedulingIgnoredDuringExecution: #Soft Affinity, scheduled on fast and superfast, unless there's something
+          preferredDuringSchedulingIgnoredDuringExecution: #Soft Node Affinity, scheduled on fast and superfast, unless there's something
             #preventing them from being allocated there, for example CPU or Memory. In that case, slow label would be allowed
             - weight: 1
               preference:
