@@ -27,9 +27,25 @@ spec:
           httpGet:
             path: {{ .Values.healthCheck.path }}
             port: {{ .Values.newinventory.containerPort }}
-      nodeSelector: #we label the node, and use that label
-        node-type: nodethree
-
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+                - key: node-type
+                  operator: NotIn
+                  values:
+                    - extremelyslow
+          preferredDuringSchedulingIgnoredDuringExecution: #Soft Affinity, scheduled on fast and superfast, unless there's something
+            #preventing them from being allocated there, for example CPU or Memory. In that case, slow label would be allowed
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: node-type
+                    operator: In
+                    values:
+                      - fast
+                      - superfast
 
 ---
 apiVersion: v1
