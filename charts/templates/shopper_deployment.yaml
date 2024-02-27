@@ -43,7 +43,7 @@ metadata:
 spec:
   selector:
     app: {{ .Values.shopper.name }}
-  type: LoadBalancer
+  type: NodePort
   ports:
   - port: {{ .Values.shopper.servicePort }}
     targetPort: {{ .Values.shopper.containerPort }}

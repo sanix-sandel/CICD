@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Values.inventory.name }}
 spec:
-  replicas: {{ .Values.inventory.replicaCount | default 1 }}
+  replicas: {{ .Values.inventory.replicaCount | default   1 }}
   selector:
     matchLabels:
       app: {{ .Values.inventory.name }}
