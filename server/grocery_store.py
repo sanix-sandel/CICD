@@ -1,7 +1,7 @@
 import os
 
 import requests
-from flask import Flask
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 

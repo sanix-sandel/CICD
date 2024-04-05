@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage("Checkout"){
             steps{
-               sh "Hello WOrlD"
+               echo 'Hello WOrlD! Today gonna be lit'
             }
         }
     }

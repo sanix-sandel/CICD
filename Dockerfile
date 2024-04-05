@@ -8,6 +8,6 @@ COPY requirements.txt .
 
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-COPY /client/shopper.py .
+COPY /server/grocery_store.py grocery.py
 
-CMD ["python", "shopper.py"]
+CMD ["python", "grocery.py"]
