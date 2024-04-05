@@ -15,7 +15,7 @@ pipeline{
         stage("Deployment"){
             steps{
                 script{
-                    sh 'helm template .'
+                    sh 'kubectl get ns'
                 }
 
             }
