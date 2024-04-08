@@ -1,24 +1,22 @@
 pipeline{
-    agent any
+    agent {
+        kubernetes {
 
-    environment{
-        HELM_HOME = '/charts'
+          label 'k8s'
+
+        }
     }
 
     stages{
-        stage("Checkout"){
-            steps{
-               echo 'Hello WOrlD! Today gonna be lit'
-            }
-        }
 
-        stage("Deployment"){
-            steps{
-                script{
-                    sh 'kubectl get ns'
-                }
+        stage('Deploy to Kubernetes') {
+            kubernetesDeploy(
+              configs: 'deployment.yaml',
 
-            }
+              kubeconfigId: 'k8s'
+
+            )
         }
     }
+
 }
