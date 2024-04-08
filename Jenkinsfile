@@ -1,11 +1,12 @@
 pipeline{
-    agent {
-        kubernetes {
-
-          label 'k8s'
-
-        }
-    }
+    agent any
+//     agent {
+//         kubernetes {
+//
+//           label 'k8s'
+//
+//         }
+//     }
 
     stages{
 
@@ -14,7 +15,7 @@ pipeline{
                 script {
                     kubernetesDeploy(
                         configFile: 'deployment.yaml',
-                        kubeconfigId: 'k8s'
+//                         kubeconfigId: 'k8s'
                     )
                 }
             }
