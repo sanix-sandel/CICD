@@ -1,12 +1,11 @@
 pipeline{
-    agent any
-//     agent {
-//         kubernetes {
-//
-//           label 'k8s'
-//
-//         }
-//     }
+    agent {
+        kubernetes {
+
+          label 'k8s'
+
+        }
+    }
 
     stages{
 
