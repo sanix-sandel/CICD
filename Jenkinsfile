@@ -12,11 +12,11 @@ pipeline{
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-//                     kubernetesDeploy(
-//                         configFile: 'deployment.yaml',
-//                         kubeconfigId: 'k8s'
-//                     )
-                    sh "kubectl apply -f deployment.yaml"
+                    kubernetesDeploy(
+                        configFile: 'deployment.yaml',
+                        kubeconfigId: 'k8s'
+                    )
+//                     sh "kubectl apply -f deployment.yaml"
                 }
             }
         }
