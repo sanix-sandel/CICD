@@ -10,7 +10,7 @@ pipeline{
 //                         configFile: 'deployment.yaml',
 //                         kubeconfigId: 'k8s'
 //                     )
-                    sh 'minikube start'
+
                     sh "kubectl apply -f deployment.yaml"
                 }
             }
