@@ -1,11 +1,5 @@
 pipeline{
-    agent {
-        kubernetes {
-
-          label 'minikube'
-
-        }
-    }
+    agent any
 
     stages{
 
