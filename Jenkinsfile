@@ -1,5 +1,11 @@
 pipeline{
-    agent any
+    agent {
+        kubernetes {
+
+          label 'minikube'
+
+        }
+    }
 
     stages{
 
@@ -10,7 +16,6 @@ pipeline{
                         configFile: 'deployment.yaml',
                         kubeconfigId: 'k8s'
                     )
-
 //                     sh "kubectl apply -f deployment.yaml"
                 }
             }
