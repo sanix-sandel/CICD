@@ -10,8 +10,8 @@ pipeline{
 //                         kubeconfigId: 'k8s'
 //                     )
                     sh 'echo $PATH'
-//                      sh "kubectl get ns"
-//                      sh "kubectl apply -f deployment.yaml"
+                    sh "/opt/homebrew/bin/kubectl get ns"
+                    sh "/opt/homebrew/bin/kubectl apply -f deployment.yaml"
                 }
             }
         }
