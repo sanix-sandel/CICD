@@ -9,8 +9,9 @@ pipeline{
 //                         configFile: 'deployment.yaml',
 //                         kubeconfigId: 'k8s'
 //                     )
-                     sh "kubectl get ns"
-                     sh "kubectl apply -f deployment.yaml"
+                    sh 'echo $PATH'
+//                      sh "kubectl get ns"
+//                      sh "kubectl apply -f deployment.yaml"
                 }
             }
         }
