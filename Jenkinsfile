@@ -1,10 +1,5 @@
 pipeline{
-    agent {
-        kubernetes {
-            defaultContainer 'jnlp'
-        }
-    }
-
+    agent any
     stages{
 
         stage('Deploy to Kubernetes') {
