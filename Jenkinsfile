@@ -1,6 +1,20 @@
 pipeline{
     agent any
+
+    parameters {
+        text(name: 'YAML_CONTENT', defaultValue: '', description: 'Enter YAML content')
+    }
+
     stages{
+
+        stage('Read YAML file'){
+            steps{
+                script{
+                    def yamlContent = params.YAML_CONTENT
+                    echo yamlContent
+                }
+            }
+        }
 
         stage('Deploy to Kubernetes') {
             steps {
