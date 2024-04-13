@@ -12,6 +12,7 @@ pipeline{
                 script{
                     def yamlContent = params.YAML_CONTENT
                     echo yamlContent
+                    writeFile file: "services.yaml", text: params.YAML_CONTENT
                     release_data = readYaml file: "services.yaml"
                 }
             }
