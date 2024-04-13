@@ -21,7 +21,7 @@ pipeline{
         stage('Performing '){
             steps{
                 script{
-                    release_data.each{release_action, action_data -> echo "${release_action} {action_data}"}
+                    release_data.each{release_action, action_data -> echo "${release_action} and  ${action_data}"}
                 }
             }
         }
