@@ -12,9 +12,19 @@ pipeline{
                 script{
                     def yamlContent = params.YAML_CONTENT
                     echo yamlContent
+                    release_data = readYaml file: "services.yaml"
                 }
             }
         }
+
+        stage('Performing '){
+            steps{
+                script{
+                    release_data.each{release_action, action_data -> echo "${release_action} {action_data}"}
+                }
+            }
+        }
+
 
         stage('Deploy to Kubernetes') {
             steps {
@@ -26,7 +36,6 @@ pipeline{
                     sh 'echo $PATH'
                     sh "/opt/homebrew/bin/kubectl get ns"
                     sh "/opt/homebrew/bin/kubectl apply -f deployment.yaml"
-                    sh "sleep 10"
                 }
             }
         }
