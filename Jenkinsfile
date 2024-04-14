@@ -22,7 +22,10 @@ pipeline{
             steps{
                 script{
                     release_data.each{release_action, action_data -> echo "${release_action} and  ${action_data}"}
-                    echo "${env.keySet()}"
+                    def allEnv = getAllEnvironment()
+                    allEnv.each { key, value ->
+                        echo "${key}: ${value}"
+                    }
                 }
             }
         }
