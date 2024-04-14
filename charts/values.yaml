@@ -40,7 +40,7 @@ inventory:
   serviceName: inventory-service
   servicePort: 9002
   nodePort: 30003
-  replicaCount: 3
+  replicaCount: 1
 
 
 newinventory:
@@ -50,7 +50,7 @@ newinventory:
   serviceName: new-inventory-service
   servicePort: 9003
   nodePort: 30004
-  replicaCount: 3
+  replicaCount: 1
 
 defaultReplicaCount: 1
 
