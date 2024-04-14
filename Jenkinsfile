@@ -22,31 +22,28 @@ pipeline{
             steps{
                 script{
                     release_data.each{release_action, action_data -> echo "${release_action} and  ${action_data}"}
+                    echo "${env}"
                 }
             }
         }
 
 
-        stage('Deploy to Kubernetes') {
-            steps {
-                script {
-//                     kubernetesDeploy(
-//                         configFile: 'deployment.yaml',
-//                         kubeconfigId: 'k8s'
-//                     )
-                    sh 'echo $PATH'
-                    sh "/opt/homebrew/bin/kubectl get ns"
-                    sh "/opt/homebrew/bin/kubectl apply -f deployment.yaml"
-                }
-            }
-        }
-        stage('Pause') {
-            steps {
-                script {
-                    sleep time: 10, unit: 'SECONDS'
-                }
-            }
-        }
+//         stage('Deploy to Kubernetes') {
+//             steps {
+//                 script {
+//                     sh 'echo $PATH'
+//                     sh "/opt/homebrew/bin/kubectl get ns"
+//                     sh "/opt/homebrew/bin/kubectl apply -f deployment.yaml"
+//                 }
+//             }
+//         }
+//         stage('Pause') {
+//             steps {
+//                 script {
+//                     sleep time: 10, unit: 'SECONDS'
+//                 }
+//             }
+//         }
         stage('Verification'){
             steps{
                 script{
