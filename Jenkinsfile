@@ -22,8 +22,8 @@ pipeline{
             steps{
                 script{
                     release_data.each{release_action, action_data -> echo "${release_action} and  ${action_data}"}
-                    def allEnv = env as Map
-                    allEnv.each { key, value ->
+                    def envVars = env.getEnvironment()
+                    envVars.each { key, value ->
                         echo "${key}: ${value}"
                     }
                 }
