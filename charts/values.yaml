@@ -6,8 +6,12 @@ config:
 
 
 resources:
-  memory: 128Mi
-  cpu: 500m
+  requests:
+    memory: "128Mi"
+    cpu: "500m"
+  limits:
+    memory: "256Mi"
+    cpu: "1"
 
 
 healthCheck:

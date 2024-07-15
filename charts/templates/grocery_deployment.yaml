@@ -16,9 +16,12 @@ spec:
       - name: grocery
         image: "{{ .Values.grocery.image }}"
         resources:
+          requests:
+            memory: "{{ .Values.resources.requests.memory }}"
+            cpu: "{{ .Values.resources.requests.cpu }}"
           limits:
-            memory: "{{ .Values.resources.memory }}"
-            cpu: "{{ .Values.resources.cpu }}"
+            memory: "{{ .Values.resources.limits.memory }}"
+            cpu: "{{ .Values.resources.limits.cpu }}"
         ports:
         - containerPort: {{ .Values.grocery.containerPort }}
         readinessProbe:
@@ -28,11 +31,11 @@ spec:
             path: {{ .Values.healthCheck.path }}
             port: {{ .Values.grocery.containerPort }}
         env:
-        - name: GROCERY_URL
+        - name: INVENTORY_URL
           valueFrom:
             configMapKeyRef:
               name: {{ .Values.config.name }}
-              key: {{ .Values.config.grocery }}
+              key: {{ .Values.config.inventory }}
 
 
 ---

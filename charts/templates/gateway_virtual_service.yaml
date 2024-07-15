@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: gateway-virtual-svc
+spec:
+  hosts:
+  - "127.0.0.1"
+  gateways:
+  - system-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: shopper-service
+            port:
+              number: 9000

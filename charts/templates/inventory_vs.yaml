@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: inventory-virtual-service
+spec:
+  hosts:
+  - inventory-service
+  http:
+#    - route:
+#      - destination:
+#          host: inventory-service
+#          port:
+#            number: 9002
+#        weight: 50
+    - route:
+      - destination:
+          host: new-inventory-service
+          port:
+            number: 9003
+#        weight: 50

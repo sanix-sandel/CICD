@@ -16,9 +16,12 @@ spec:
       - name: inventory
         image: "{{ .Values.inventory.image }}"
         resources:
+          requests:
+            memory: "{{ .Values.resources.requests.memory }}"
+            cpu: "{{ .Values.resources.requests.cpu }}"
           limits:
-            memory: "{{ .Values.resources.memory }}"
-            cpu: "{{ .Values.resources.cpu }}"
+            memory: "{{ .Values.resources.limits.memory }}"
+            cpu: "{{ .Values.resources.limits.cpu }}"
         ports:
         - containerPort: {{ .Values.inventory.containerPort }}
         readinessProbe:
