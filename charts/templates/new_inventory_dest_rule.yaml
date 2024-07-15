@@ -1,0 +1,16 @@
+#apiVersion: networking.istio.io/v1
+#kind: DestinationRule
+#metadata:
+#  name: new-inventory
+#spec:
+#  host: new-inventory-service
+##  trafficPolicy:
+##    loadBalancer:
+##      simple: LEAST_REQUEST
+#  subsets:
+#  - name: newinventory
+#    labels:
+#      app: {{ .Values.newinventory.name }}
+##    trafficPolicy:
+##      loadBalancer:
+##        simple: ROUND_ROBIN

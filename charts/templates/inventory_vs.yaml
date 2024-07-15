@@ -6,15 +6,23 @@ spec:
   hosts:
   - inventory-service
   http:
-#    - route:
-#      - destination:
-#          host: inventory-service
-#          port:
-#            number: 9002
-#        weight: 50
     - route:
       - destination:
-          host: new-inventory-service
+          host: inventory-service
+          #subset: inventory
           port:
-            number: 9003
+            number: 9002
+      mirror:
+        host: new-inventory-service
+        port:
+          number: 9003
+      mirrorPercentage:
+        value: 100.0
+#        weight: 50
+#    - route:
+#      - destination:
+#          host: new-inventory-service
+#          subset: newinventory
+#          port:
+#            number: 9003
 #        weight: 50
